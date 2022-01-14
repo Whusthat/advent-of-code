@@ -1,13 +1,13 @@
 from readInput import read_input
 
-#read input from file
-input = read_input("input.txt")
+# read content from file
+content = read_input("input.txt", 'true')
 
 totals = []
 
-for index in range(len(input)):
-    if (len(input) - index) > 3:
-        sum = input[index] + input[index+1] + input[index+2]
+for index in range(len(content)):
+    if (len(content) - index) > 3:
+        sum = content[index] + content[index + 1] + content[index + 2]
         totals.append(sum)
        
 j = 0
