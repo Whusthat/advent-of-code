@@ -11,7 +11,7 @@ def mostBit(str):
         return 0
 
 
-def loop(bitlist, i):
+def loop(bitlist, i, n=bool):
     a = ""
     b = ""
     for bin in bitlist:
@@ -19,22 +19,33 @@ def loop(bitlist, i):
             a += bin[i]
         else:
             b += bin[i]
-    if len(a) > len(b) or len(a) == len(b):
-        bitlist = [x for x in bitlist if not x[i] == "0"]
-        return bitlist
+    if n:
+        if len(a) > len(b) or len(a) == len(b):
+            bitlist = [x for x in bitlist if not x[i] == "1"]
+            return bitlist
+        else:
+            bitlist = [x for x in bitlist if not x[i] == "0"]
+            return bitlist
     else:
-        bitlist = [x for x in bitlist if not x[i] == "1"]
-        return bitlist
+        if len(a) > len(b) or len(a) == len(b):
+            bitlist = [x for x in bitlist if not x[i] == "0"]
+            return bitlist
+        else:
+            bitlist = [x for x in bitlist if not x[i] == "1"]
+            return bitlist
 
 
-listHolder = loop(data, 0)
+def search(list, i, n=bool):
+    while len(list) > 1:
+        list = loop(list, i, n)
+        i += 1
+    return list
 
-index = 1
 
-while len(listHolder) > 1:
-    listHolder = loop(listHolder, index)
-    index += 1
+oxygenGeneratorRating = search(data, 0, n=False)
+scrubberRating = search(data, 0, n=True)
 
-oxygenGeneratorRating = str(listHolder[0])
+oxygenGeneratorRating = str(oxygenGeneratorRating[0])
+scrubberRating = str(scrubberRating[0])
 
-print(int(oxygenGeneratorRating, 2))
+print(int(oxygenGeneratorRating, 2) * int(scrubberRating, 2))
