@@ -19,7 +19,7 @@ def loop(bitlist, i):
             a += bin[i]
         else:
             b += bin[i]
-    if a > b:
+    if len(a) > len(b) or len(a) == len(b):
         bitlist = [x for x in bitlist if not x[i] == "0"]
         return bitlist
     else:
@@ -27,9 +27,14 @@ def loop(bitlist, i):
         return bitlist
 
 
-j = loop(data, 0)
-k = loop(j, 1)
-n = loop(k, 2)
-m = loop(n, 3)
+listHolder = loop(data, 0)
 
-print(a)
+index = 1
+
+while len(listHolder) > 1:
+    listHolder = loop(listHolder, index)
+    index += 1
+
+oxygenGeneratorRating = str(listHolder[0])
+
+print(int(oxygenGeneratorRating, 2))
