@@ -21,16 +21,15 @@ def remove_whitespace(liste):
 
 
 def bingo_round(number):
-    for i, v in enumerate(finalBoards):
-        print(v)
+    for index, v in enumerate(finalBoards):
+        for value in v:
+            if value == number:
+                print(finalBoards.index(v), v.index(value))
 
 
 finalBoards = remove_whitespace(holder)
 
-print(finalBoards[0][0])
-
-bingo_round(12)
-
+bingo_round("12")
 
 
 
