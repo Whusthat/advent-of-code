@@ -1,3 +1,5 @@
+import math
+
 with open("input.in") as fin:
     numbers = fin.readline().strip("\n")
     numbers = numbers.split(",")
@@ -29,15 +31,28 @@ def bingo_round(number):
                 altered_value = value.replace(value, "HIT")
                 v.pop(str_index)
                 v.insert(str_index, altered_value)
+            if checkWinner():
+                print(math.floor(index / 5))
+
+
+def checkWinner():
+    x = 0
+    y = 0
+    for index, v in enumerate(finalBoards):
+        for number in v:
+            if number == "HIT":
+                x = x + 1
+        if x == 5:
+            return True
+        x = 0
+        y = 0
 
 
 finalBoards = remove_whitespace(holder)
 
 for num in numbers:
-    bingo_round(num)
+    if bingo_round(num):
+        print("winner")
+        break
 
 print(finalBoards)
-
-
-
-

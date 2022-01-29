@@ -20,7 +20,6 @@ class Submarine:
 
 commands = read_input('input.txt', 'false')
 
-
 for command in commands:
     step = int(re.search(r'\d+', command).group())
     direction = re.sub(r'\s*\d+\s*', '', command)
@@ -33,6 +32,5 @@ for command in commands:
 
     if direction == 'up':
         Submarine.up(Submarine, step)
-
 
 print(Submarine.horizontal * Submarine.depth)
