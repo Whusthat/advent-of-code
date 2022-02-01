@@ -14,9 +14,9 @@ def cordinates(lines):
         x2, y2 = map(int, y.split(","))
 
         if x1 == x2 or y1 == y2:
-            for z in range(min(x1, x2), max(x1, x2) + 1):
+            for x in range(min(x1, x2), max(x1, x2) + 1):
                 for y in range(min(y1, y2), max(y1, y2) + 1):
-                    points.append((z, y))
+                    points.append((x, y))
 
     print(len([point for point in Counter(points).values() if point > 1]))
 
