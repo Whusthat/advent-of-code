@@ -8,7 +8,7 @@ def remove_whitespace(liste):
     return j
 
 
-with open("test.in") as fin:
+with open("input.in") as fin:
     holder = []
     holderA = []
     numbers = fin.readline().strip("\n")
@@ -22,10 +22,17 @@ with open("test.in") as fin:
     boards = ([final[i:i + 5] for i in range(0, len(final), 5)])
 
 
+class Game:
+    boards_left = 101
+
+    def minus(self):
+        self.boards_left = self.boards_left - 1
+
+
 class Board:
     row = 0
     column = 0
-    winnerBoard = False
+    flag = True
 
     def __init__(self, list):
         self.board = list
@@ -43,43 +50,57 @@ class Board:
             for z, c in enumerate(b):
                 if c == number:
                     b[z] = "hit"
-                    self.winner(number)
-                    return True
+                    if self.count_columns(self.board) and self.flag:
+                        self.flag = False
+                        game_round.minus()
+                        if game_round.boards_left == 1:
+                            self.calcb(self.board, number)
+                            return True
+                    if self.count_rows(self.board) and self.flag:
+                        self.flag = False
+                        game_round.minus()
+                        if game_round.boards_left == 1:
+                            self.calcb(self.board, number)
+                            return True
 
-    def winner(self, num):
-        for i, b in enumerate(self.board):
+    def count_columns(self, matrix):
+        column_count = len(matrix)
+        column_index = 0
+        count_hits = 0
+        while column_count > 0:
+            for column in matrix:
+                if column[column_index] == "hit":
+                    count_hits = count_hits + 1
+                if count_hits == 5:
+                    return True
+            column_count = column_count - 1
+            column_index = column_index + 1
+            count_hits = 0
+
+    def count_rows(self, matrix):
+        row_hits = 0
+        for i, b in enumerate(matrix):
             for z, c in enumerate(b):
                 if b[z] == "hit":
-                    self.row = self.row + 1
-                if self.row == 5:
-                    self.calcb(self.board, num)
-                    self.winnerBoard = True
-                    self.row = 0
+                    row_hits = row_hits + 1
+                if row_hits == 5:
                     return True
-                if z == 4:
-                    self.row = 0
-                if self.board[z][i] == "hit":
-                    self.column = self.column + 1
-                    print("a")
-                if self.column == 5:
-                    self.calcb(self.board, num)
-                    self.winnerBoard = True
-                    self.column = 0
-                    return True
-                if i == 4:
-                    self.column = 0
-
+            row_hits = 0
 
 
 objs = [Board(i) for i in boards]
+game_round = Game()
 
+print(len(objs))
 
 def play(er):
     for num in er:
+        print(game_round.boards_left)
         for obj in objs:
-            obj.round(num)
-            if obj.winnerBoard:
-                return True
+
+            if obj.round(num):
+                print("w")
+
 
 
 play(numbers)
