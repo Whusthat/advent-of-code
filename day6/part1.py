@@ -3,25 +3,22 @@ from fishClass import Fish
 # Handle Input
 with open('input.in') as file:
     data = file.read().split(",")       # remove comma
-    data = [int(x) for x in data]  # convert every char of str in int and wrap them in list
+    data = [int(x) for x in data]       # convert every char of str in int and wrap them in list
 
 
-def count_fishes_a(intevals):
-
-    fishes = [Fish(timer) for timer in intevals]        # create Fish objects with internal timer
+def count_fishes_a(intervals):
     days = 80
 
-    while days > 0:
-        new_fishes = 0
-        for fish in fishes:
-            if fish.timer > 0:
-                fish.timer -= 1
-            else:
-                new_fishes += 1
-                fish.timer = 6
-        days -= 1
+    fishes = [i for i in intervals]
+    for x in range(0, days):
+        for i, fish in enumerate(fishes):
+            if fishes[i] > 0:
+                fishes[i] -= 1
+            elif fishes[i] == 0:
+                fishes[i] = 6
+                fishes.append(9)        # set 1 higher than 8 because we are not skipping new fishes
 
-        print(len(fishes))
+    print(len(fishes))
 
 
 count_fishes_a(data)
