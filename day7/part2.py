@@ -12,27 +12,31 @@ def count_fuel(dataset):
     i = 0
 
     for data in dataset:
-
-        current_pos = data
-        destin_pos = positions[i]
-        costs = 0
-        counter = 0
-        fuel_to_destin = []
-
-        if current_pos > destin_pos:
-            for x in range(destin_pos, current_pos):
-                costs += 1
-                counter += costs
-                fuel_to_destin.append(counter)
-        else:
-            for x in range(current_pos, destin_pos):
-                costs += 1
-                counter += costs
-                fuel_to_destin.append(counter)
+        holder = []
+        for number in positions:
+            fuel_to_destin = []
+            current_pos = data
+            destin_pos = number
+            costs = 0
+            counter = 0
+            if current_pos > destin_pos:
+                for x in range(destin_pos, current_pos):
+                    costs += 1
+                    counter += costs
+                    fuel_to_destin.append(counter)
+            elif current_pos == destin_pos:
+                fuel_to_destin.append(1)
+            else:
+                for x in range(current_pos, destin_pos):
+                    costs += 1
+                    counter += costs
+                    fuel_to_destin.append(counter)
+            holder.append([sum(fuel_to_destin)])
+        fuel.append(holder)
         i += 1
-        fuel.append(fuel_to_destin)
 
-    return min(fuel)
+
+    print(fuel)
 
 
 print("Answer for Part2: ", count_fuel(horizontalPositions))
