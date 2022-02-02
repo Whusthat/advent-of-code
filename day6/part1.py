@@ -1,5 +1,3 @@
-from fishClass import Fish
-
 # Handle Input
 with open('input.in') as file:
     data = file.read().split(",")       # remove comma
