@@ -18,10 +18,10 @@ def count_fishes_a(intervals):
                 fishes[i] = 6
                 fishes.append(9)        # set 1 higher than 8 because we are not skipping new fishes
 
-    print(len(fishes))
+    return len(fishes)
 
 
-count_fishes_a(data)
+print("Answer for Part1: ", count_fishes_a(data))
 
 
 
