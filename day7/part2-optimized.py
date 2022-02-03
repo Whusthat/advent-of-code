@@ -1,6 +1,4 @@
 # Input Handle
-import statistics
-
 with open('input.in') as file:
     horizontalPositions = file.read().split(",")
     horizontalPositions = [int(x) for x in horizontalPositions]
@@ -19,9 +17,7 @@ def count_fuel(dataset):
     for position in range(min(dataset), max(dataset) + 1):
         fuel = 0
         for crab in dataset:
-            crabPos = crab
-            destinPos = position
-            fuel += triangular_cost(abs(crabPos - destinPos))
+            fuel += triangular_cost(abs(position - crab))
 
             # only keep lowest fuel value, so you don not need a stack
         minFuel = min(fuel, minFuel)
