@@ -8,22 +8,27 @@ need = 168
 
 def count_fuel(dataset):
     fuel = []
-    finalFuel = []
-    positionToReach = [x for x in range(max(dataset) + 1)]
+    positionToReach = [x for x in range(max(dataset))]
 
-    for reach in positionToReach:
-        for i, position in enumerate(dataset):
-            current_fuel = []
-            count_current = 0
-            for step in range(0, max(reach, position) - min(reach, position)):
-                count_current += step + 1
-                if step == (max(reach, position) - min(reach, position) - 1):
-                    current_fuel.append(count_current)
-            fuel.append(sum(current_fuel))
-        finalFuel.append(sum(fuel))
-        fuel.clear()
+    for posTo in positionToReach:
+        fuel_tank = []
+        for position in dataset:
+            currentPosition = position
+            distance = (max(currentPosition, posTo) - min(posTo, currentPosition))
+            fuel_count = 0
+            cost = 0
+            for way in range(distance):
+                cost += 1
+                fuel_count += cost
+            fuel_tank.append(fuel_count)
+        fuel.append(sum(fuel_tank))
 
-    return min(finalFuel)
+    return min(fuel)
+
+
+
+
+
 
 
 
