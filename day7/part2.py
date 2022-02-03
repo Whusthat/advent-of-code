@@ -26,13 +26,4 @@ def count_fuel(dataset):
     return min(fuel)
 
 
-
-
-
-
-
-
-
-
-
 print("Answer for Part2: ", count_fuel(horizontalPositions))
